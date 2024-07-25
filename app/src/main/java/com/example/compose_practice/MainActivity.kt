@@ -3,6 +3,10 @@ package com.example.compose_practice
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -20,10 +24,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -48,6 +55,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@Preview
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyBottomAppBar() {
@@ -71,12 +79,7 @@ fun MyBottomAppBar() {
                     },
                     modifier = Modifier.weight(1f)
                 ) {
-                    Icon(
-                        Icons.Default.Home,
-                        contentDescription = null,
-                        modifier = Modifier.size(26.dp),
-                        tint = if (selected.value == Icons.Default.Home) Color.Blue else Color.DarkGray
-                    )
+                    NavItem(icon = Icons.Default.Home, selected = selected, selectedIcon = Icons.Default.Home, label = "홈")
                 }
 
                 IconButton(
@@ -88,12 +91,7 @@ fun MyBottomAppBar() {
                     },
                     modifier = Modifier.weight(1f)
                 ) {
-                    Icon(
-                        Icons.Default.Add,
-                        contentDescription = null,
-                        modifier = Modifier.size(26.dp),
-                        tint = if (selected.value == Icons.Default.Add) Color.Blue else Color.DarkGray
-                    )
+                    NavItem(icon = Icons.Default.Add, selected = selected, selectedIcon = Icons.Default.Add, label = "생각더하기")
                 }
 
                 IconButton(
@@ -105,12 +103,7 @@ fun MyBottomAppBar() {
                     },
                     modifier = Modifier.weight(1f)
                 ) {
-                    Icon(
-                        Icons.Default.Share,
-                        contentDescription = null,
-                        modifier = Modifier.size(26.dp),
-                        tint = if (selected.value == Icons.Default.Share) Color.Blue else Color.DarkGray
-                    )
+                    NavItem(icon = Icons.Default.Share, selected = selected, selectedIcon = Icons.Default.Share, label = "생각나누기")
                 }
 
                 IconButton(
@@ -122,12 +115,7 @@ fun MyBottomAppBar() {
                     },
                     modifier = Modifier.weight(1f)
                 ) {
-                    Icon(
-                        Icons.Default.Person,
-                        contentDescription = null,
-                        modifier = Modifier.size(26.dp),
-                        tint = if (selected.value == Icons.Default.Person) Color.Blue else Color.DarkGray
-                    )
+                    NavItem(icon = Icons.Default.Person, selected = selected, selectedIcon = Icons.Default.Person, label = "마이페이지")
                 }
             }
         }
@@ -142,5 +130,27 @@ fun MyBottomAppBar() {
             composable(Screens.Share.screen) { ShareScreen() }
             composable(Screens.Profile.screen) { ProfileScreen() }
         }
+    }
+}
+
+@Composable
+fun RowScope.NavItem(
+    icon: ImageVector,
+    selected: MutableState<ImageVector>,
+    selectedIcon: ImageVector,
+    label: String,
+) {
+    Column (
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ){
+        Icon(imageVector = icon, 
+            contentDescription = label, 
+            modifier = Modifier.size(26.dp),
+            tint = if (selected.value == selectedIcon) Color.Blue else Color.DarkGray
+        )
+        Text(text = label,
+            color = if (selected.value == selectedIcon) Color.Blue else Color.DarkGray
+            )
     }
 }
