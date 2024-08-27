@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,11 +25,15 @@ fun ProfileScreen() {
             TopAppBar(
                 title = { Text("마이페이지") },
                 actions = {
-                    // 여기에 앱바의 오른쪽에 표시할 아이콘이나 액션 버튼을 추가할 수 있습니다.
+                    IconButton(onClick = {
+
+                    }) {
+                        Icon(
+                            imageVector = Icons.Filled.Settings, // 기본 아이콘 설정
+                            contentDescription = "Settings"
+                        )
+                    }
                 },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp) // 기본 높이 설정
             )
         }
     ) { innerPadding ->
