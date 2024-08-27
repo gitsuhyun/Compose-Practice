@@ -8,9 +8,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import com.example.compose_practice.ui.theme.Pink40
 
+@Preview
 @Composable
 fun ShareScreen() {
     Box(modifier = Modifier.fillMaxSize()){
@@ -19,7 +20,7 @@ fun ShareScreen() {
             .align(Alignment.Center),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "share", fontSize = 30.sp, color = Pink40)
+            Text(text = "share", fontSize = 30.sp,)
         }
     }
 }

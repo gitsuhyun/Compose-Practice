@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
-import com.example.compose_practice.ui.theme.Pink40
 
 @Composable
 fun ProfileScreen() {
@@ -19,7 +18,7 @@ fun ProfileScreen() {
             .align(Alignment.Center),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "profile", fontSize = 30.sp, color = Pink40)
+            Text(text = "profile", fontSize = 30.sp,)
         }
     }
 }
