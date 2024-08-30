@@ -5,9 +5,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -49,15 +52,19 @@ fun ProfileScreen() {
                     .fillMaxSize()
             ) {
                 Row (
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().padding(start = 19.dp, end = 16.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ){
-                    Image(painter = painterResource(id = R.drawable.ic_profile), contentDescription = null)
-                    Column {
+                    Image(painter = painterResource(id = R.drawable.ic_profile), contentDescription = null, modifier = Modifier.size(60.dp))
+                    Column (
+                        verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.Top),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ){
                         Image(painter = painterResource(id = R.drawable.ic_level), contentDescription = null)
                         Text(text = "김두둑", style = ComposePracticeTheme.typography.Bn1_b.copy(color = ComposePracticeTheme.colors.black))
                     }
-                    Image(painter = painterResource(id = R.drawable.ic_dotori), contentDescription = null)
+                    Spacer(modifier = Modifier.weight(1f))
+                    Image(painter = painterResource(id = R.drawable.ic_dotori), contentDescription = null,  modifier = Modifier.size(38.dp))
                     Text(text = "20", style = ComposePracticeTheme.typography.Br1_sb.copy(color = ComposePracticeTheme.colors.black))
                 }
                 Row (
@@ -79,6 +86,10 @@ fun ProfileScreen() {
                         Text(text = "0", style = ComposePracticeTheme.typography.Ln1_m.copy(color = ComposePracticeTheme.colors.g6))
                     }
                 }
+
+                //
+                Text(text = "목표 달성률", style = ComposePracticeTheme.typography.Headline2_b.copy(color = ComposePracticeTheme.colors.g6))
+                Text(text = "나의 아카이브", style = ComposePracticeTheme.typography.Headline2_b.copy(color = ComposePracticeTheme.colors.g6))
 
             }
         }
