@@ -5,14 +5,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,13 +16,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.compose_practice.R
 import com.example.compose_practice.ui.theme.ComposePracticeTheme
-import com.example.compose_practice.ui.theme.GoodMoney
-import com.example.compose_practice.ui.theme.black
-import com.example.compose_practice.ui.theme.g4
-import com.example.compose_practice.ui.theme.v1
 
 @OptIn(ExperimentalMaterial3Api::class) // AppBar에 필요한 Experimental API 사용
 @Composable
@@ -35,7 +25,7 @@ fun ProfileScreen() {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("마이페이지") },
+                title = { Text("마이페이지", style = TextStyle(color = ComposePracticeTheme.colors.black)) },
                 actions = {
                     IconButton(onClick = {
                         //세팅 페이지 이동
@@ -65,10 +55,10 @@ fun ProfileScreen() {
                     Image(painter = painterResource(id = R.drawable.ic_profile), contentDescription = null)
                     Column {
                         Image(painter = painterResource(id = R.drawable.ic_level), contentDescription = null)
-                        Text(text = "김두둑")
+                        Text(text = "김두둑", style = TextStyle(color = ComposePracticeTheme.colors.black))
                     }
                     Image(painter = painterResource(id = R.drawable.ic_dotori), contentDescription = null)
-                    Text(text = "20")
+                    Text(text = "20", style = TextStyle(color = ComposePracticeTheme.colors.black))
                 }
                 Row (
                     modifier = Modifier.fillMaxWidth(),
@@ -78,15 +68,15 @@ fun ProfileScreen() {
                         verticalArrangement = Arrangement.spacedBy(2.dp, Alignment.Top),
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
-                        Text(text = "팔로워", style = TextStyle(color = g4))
-                        Text(text = "0")
+                        Text(text = "팔로워", style = TextStyle(color = ComposePracticeTheme.colors.g4))
+                        Text(text = "0", style = TextStyle(color = ComposePracticeTheme.colors.g6))
                     }
                     Column(
                         verticalArrangement = Arrangement.spacedBy(2.dp, Alignment.Top),
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
-                        Text(text = "팔로잉", style = TextStyle(color = g4))
-                        Text(text = "0")
+                        Text(text = "팔로잉", style = TextStyle(color = ComposePracticeTheme.colors.g4))
+                        Text(text = "0", style = TextStyle(color = ComposePracticeTheme.colors.g6))
                     }
                 }
 
