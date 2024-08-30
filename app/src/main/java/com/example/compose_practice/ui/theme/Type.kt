@@ -2,6 +2,7 @@ package com.example.compose_practice.ui.theme
 
 
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -84,7 +85,7 @@ val pretendard = FontFamily(
     Font(R.font.pretendard_regular, FontWeight.Normal, FontStyle.Normal),
     Font(R.font.pretendard_semi_bold, FontWeight.SemiBold, FontStyle.Normal)
 )
-// Set of Material typography styles to start with
+
 val Typography = GoodMoney(
     Title1_r = TextStyle(
         fontFamily = pretendard,
@@ -348,3 +349,6 @@ val Typography = GoodMoney(
         fontFamily = pretendard
     )
 )
+
+val LocalTypography = staticCompositionLocalOf { Typography }
+
