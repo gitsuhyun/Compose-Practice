@@ -8,6 +8,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import com.example.compose_practice.ui.theme.ComposePracticeTheme.typography
 
 fun colors() = AppColors()
 
@@ -28,6 +29,7 @@ fun ComposePracticeTheme(
     }
     CompositionLocalProvider(
         LocalColors provides colors,
+        LocalTypography provides typography
     ) {
         content()
     }

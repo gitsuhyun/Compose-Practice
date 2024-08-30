@@ -8,4 +8,10 @@ object ComposePracticeTheme {
     @Composable
     @ReadOnlyComposable
     get() = LocalColors.current
+
+    val typography: GoodMoney
+    @Composable
+    @ReadOnlyComposable
+    get() = LocalTypography.current
+
 }
