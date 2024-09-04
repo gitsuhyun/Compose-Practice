@@ -43,6 +43,7 @@ import com.example.compose_practice.screens.ProfileScreen
 import com.example.compose_practice.screens.Screens
 import com.example.compose_practice.screens.ShareScreen
 import com.example.compose_practice.ui.theme.ComposePracticeTheme
+import com.example.compose_practice.ui.theme.colors
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +69,8 @@ fun MyBottomAppBar() {
     Scaffold(
         bottomBar = {
             BottomAppBar(
-                contentColor = Color.White
+                contentColor = Color.White,
+                containerColor = Color.White
             ) {
                 IconButton(
                     onClick = {
@@ -79,7 +81,12 @@ fun MyBottomAppBar() {
                     },
                     modifier = Modifier.weight(1f)
                 ) {
-                    NavItem(icon = Icons.Default.Home, selected = selected, selectedIcon = Icons.Default.Home, label = "홈")
+                    NavItem(
+                        icon = Icons.Default.Home,
+                        selected = selected,
+                        selectedIcon = Icons.Default.Home,
+                        label = "홈"
+                    )
                 }
 
                 IconButton(
@@ -91,7 +98,12 @@ fun MyBottomAppBar() {
                     },
                     modifier = Modifier.weight(1f)
                 ) {
-                    NavItem(icon = Icons.Default.Add, selected = selected, selectedIcon = Icons.Default.Add, label = "생각더하기")
+                    NavItem(
+                        icon = Icons.Default.Add,
+                        selected = selected,
+                        selectedIcon = Icons.Default.Add,
+                        label = "생각더하기"
+                    )
                 }
 
                 IconButton(
@@ -103,7 +115,12 @@ fun MyBottomAppBar() {
                     },
                     modifier = Modifier.weight(1f)
                 ) {
-                    NavItem(icon = Icons.Default.Share, selected = selected, selectedIcon = Icons.Default.Share, label = "생각나누기")
+                    NavItem(
+                        icon = Icons.Default.Share,
+                        selected = selected,
+                        selectedIcon = Icons.Default.Share,
+                        label = "생각나누기"
+                    )
                 }
 
                 IconButton(
@@ -115,17 +132,22 @@ fun MyBottomAppBar() {
                     },
                     modifier = Modifier.weight(1f)
                 ) {
-                    NavItem(icon = Icons.Default.Person, selected = selected, selectedIcon = Icons.Default.Person, label = "마이페이지")
+                    NavItem(
+                        icon = Icons.Default.Person,
+                        selected = selected,
+                        selectedIcon = Icons.Default.Person,
+                        label = "마이페이지"
+                    )
                 }
             }
         }
-    ) {
-        paddingValues ->
+    ) { paddingValues ->
         NavHost(
             navController = navigationController,
             startDestination = Screens.Home.screen,
-            modifier = Modifier.padding(paddingValues)){
-            composable(Screens.Home.screen) { HomeScreen()}
+            modifier = Modifier.padding(paddingValues)
+        ) {
+            composable(Screens.Home.screen) { HomeScreen() }
             composable(Screens.Plus.screen) { PlusScreen() }
             composable(Screens.Share.screen) { ShareScreen() }
             composable(Screens.Profile.screen) { ProfileScreen() }
@@ -140,17 +162,19 @@ fun RowScope.NavItem(
     selectedIcon: ImageVector,
     label: String,
 ) {
-    Column (
+    Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
-    ){
-        Icon(imageVector = icon, 
-            contentDescription = label, 
+    ) {
+        Icon(
+            imageVector = icon,
+            contentDescription = label,
             modifier = Modifier.size(26.dp),
             tint = if (selected.value == selectedIcon) Color.Blue else Color.DarkGray
         )
-        Text(text = label,
-            color = if (selected.value == selectedIcon) Color.Blue else Color.DarkGray
-            )
+        Text(
+            text = label,
+            style = ComposePracticeTheme.typography.Caption2_m.copy(color = ComposePracticeTheme.colors.g6),
+        )
     }
 }
