@@ -2,17 +2,16 @@ package com.example.compose_practice.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -23,11 +22,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.compose_practice.R
-import com.example.compose_practice.ui.theme.AppColors
 import com.example.compose_practice.ui.theme.ComposePracticeTheme
 
 @OptIn(ExperimentalMaterial3Api::class) // AppBar에 필요한 Experimental API 사용
@@ -71,13 +68,15 @@ fun ProfileScreen() {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 19.dp, end = 16.dp),
+                        .padding(start = 19.dp, end = 16.dp, bottom = 12.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_profile),
                         contentDescription = null,
-                        modifier = Modifier.size(60.dp).padding(end = 14.dp)
+                        modifier = Modifier
+                            .size(60.dp)
+                            .padding(end = 14.dp, bottom = 5.dp)
                     )
                     Column(
                         verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.Top),
@@ -93,18 +92,38 @@ fun ProfileScreen() {
                         )
                     }
                     Spacer(modifier = Modifier.weight(1f))
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_dotori),
-                        contentDescription = null,
-                        modifier = Modifier.size(38.dp)
-                    )
-                    Text(
-                        text = "20",
-                        style = ComposePracticeTheme.typography.Br1_sb.copy(color = ComposePracticeTheme.colors.black)
-                    )
+                    Box (
+                        modifier = Modifier
+                            .border(
+                                width = 1.dp,
+                                color = ComposePracticeTheme.colors.g1,
+                                shape = RoundedCornerShape(size = 32.dp)
+                            )
+                            .background(color = Color.White, RoundedCornerShape(size = 32.dp))
+                            .padding(horizontal = 12.dp, vertical = 8.dp)
+                    ){
+                        Row (
+                            horizontalArrangement = Arrangement.spacedBy(4.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ){
+                            Image(
+                                painter = painterResource(id = R.drawable.ic_dotori),
+                                contentDescription = null,
+                                modifier = Modifier.size(38.dp)
+                            )
+                            Text(
+                                text = "20",
+                                style = ComposePracticeTheme.typography.Br1_sb.copy(color = ComposePracticeTheme.colors.black),
+                                modifier = Modifier.padding(end = 8.dp)
+                            )
+                        }
+                    }
                 }
+
                 Row(
-                    modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 8.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Column(
@@ -138,7 +157,8 @@ fun ProfileScreen() {
                 //프로필 아래
                 Box (
                     modifier = Modifier
-                        .background(ComposePracticeTheme.colors.g1).padding(top = 32.dp)
+                        .background(ComposePracticeTheme.colors.g1)
+                        .padding(top = 32.dp)
                 ){
                     Column(modifier = Modifier.padding(start = 20.dp, end = 20.dp)) {
                         //목표 달성률
@@ -201,10 +221,24 @@ private fun myArchives() {
                 .background(Color.White, RoundedCornerShape(10.dp))
                 .padding(vertical = 16.dp, horizontal = 16.dp)
         ) {
-            Text(
-                text = "글로벌",
-                style = ComposePracticeTheme.typography.Bn2_sb.copy(color = ComposePracticeTheme.colors.black)
-            )
+            Row {
+                Column {
+                    Text(
+                        text = "글로벌",
+                        style = ComposePracticeTheme.typography.Bn2_sb.copy(color = ComposePracticeTheme.colors.black)
+                    )
+                    Text(
+                        text = "10개",
+                        style = ComposePracticeTheme.typography.Caption2_m.copy(color = ComposePracticeTheme.colors.v6)
+                    )
+                }
+                Spacer(modifier = Modifier.weight(1f))
+                Image(
+                    painter = painterResource(id = R.drawable.ic_global),
+                    contentDescription = null,
+                    modifier = Modifier.size(38.dp)
+                )
+            }
         }
         Box(
             modifier = Modifier
@@ -212,10 +246,24 @@ private fun myArchives() {
                 .background(Color.White, RoundedCornerShape(10.dp))
                 .padding(vertical = 16.dp, horizontal = 16.dp)
         ) {
-            Text(
-                text = "금융",
-                style = ComposePracticeTheme.typography.Bn2_sb.copy(color = ComposePracticeTheme.colors.black)
-            )
+            Row {
+                Column {
+                    Text(
+                        text = "금융",
+                        style = ComposePracticeTheme.typography.Bn2_sb.copy(color = ComposePracticeTheme.colors.black)
+                    )
+                    Text(
+                        text = "10개",
+                        style = ComposePracticeTheme.typography.Caption2_m.copy(color = ComposePracticeTheme.colors.v6)
+                    )
+                }
+                Spacer(modifier = Modifier.weight(1f))
+                Image(
+                    painter = painterResource(id = R.drawable.ic_money),
+                    contentDescription = null,
+                    modifier = Modifier.size(38.dp)
+                )
+            }
         }
     }
     //2열
@@ -231,10 +279,24 @@ private fun myArchives() {
                 .background(Color.White, RoundedCornerShape(10.dp))
                 .padding(vertical = 16.dp, horizontal = 16.dp)
         ) {
-            Text(
-                text = "증권",
-                style = ComposePracticeTheme.typography.Bn2_sb.copy(color = ComposePracticeTheme.colors.black)
-            )
+            Row {
+                Column {
+                    Text(
+                        text = "증권",
+                        style = ComposePracticeTheme.typography.Bn2_sb.copy(color = ComposePracticeTheme.colors.black)
+                    )
+                    Text(
+                        text = "10개",
+                        style = ComposePracticeTheme.typography.Caption2_m.copy(color = ComposePracticeTheme.colors.v6)
+                    )
+                }
+                Spacer(modifier = Modifier.weight(1f))
+                Image(
+                    painter = painterResource(id = R.drawable.ic_bank),
+                    contentDescription = null,
+                    modifier = Modifier.size(38.dp)
+                )
+            }
         }
         Box(
             modifier = Modifier
@@ -242,10 +304,24 @@ private fun myArchives() {
                 .background(Color.White, RoundedCornerShape(10.dp))
                 .padding(vertical = 16.dp, horizontal = 16.dp)
         ) {
-            Text(
-                text = "부동산",
-                style = ComposePracticeTheme.typography.Bn2_sb.copy(color = ComposePracticeTheme.colors.black)
-            )
+            Row {
+                Column {
+                    Text(
+                        text = "부동산",
+                        style = ComposePracticeTheme.typography.Bn2_sb.copy(color = ComposePracticeTheme.colors.black)
+                    )
+                    Text(
+                        text = "10개",
+                        style = ComposePracticeTheme.typography.Caption2_m.copy(color = ComposePracticeTheme.colors.v6)
+                    )
+                }
+                Spacer(modifier = Modifier.weight(1f))
+                Image(
+                    painter = painterResource(id = R.drawable.ic_bank_statement),
+                    contentDescription = null,
+                    modifier = Modifier.size(38.dp)
+                )
+            }
         }
     }
 }
@@ -296,7 +372,7 @@ private fun myPageButton() {
     }
     Box(
         modifier = Modifier
-            .padding(bottom = 12.dp)
+            .padding(bottom = 22.dp)
             .background(Color.White, RoundedCornerShape(10.dp))
             .padding(vertical = 13.dp, horizontal = 16.dp)
     ) {
