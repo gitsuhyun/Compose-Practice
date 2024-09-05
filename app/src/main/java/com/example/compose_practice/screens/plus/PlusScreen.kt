@@ -1,22 +1,20 @@
-package com.example.compose_practice.screens
+package com.example.compose_practice.screens.plus
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -30,17 +28,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.compose_practice.R
+import com.example.compose_practice.screens.Screens
 import com.example.compose_practice.ui.theme.ComposePracticeTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PlusScreen() {
+fun PlusScreen(
+    navController: NavController
+) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -84,8 +85,7 @@ fun PlusScreen() {
                 Column (
                     verticalArrangement = Arrangement.spacedBy(20.dp), //간격
                 ){
-                    thinkCloudBox()
-                    thinkCloudBox()
+                    thinkCloudBox(navController)
                 }
             }
         }
@@ -93,7 +93,9 @@ fun PlusScreen() {
 }
 
 @Composable
-private fun thinkCloudBox() {
+private fun thinkCloudBox(
+    navController: NavController
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -186,6 +188,7 @@ private fun thinkCloudBox() {
                             shape = RoundedCornerShape(size = 29.dp)
                         )
                         .padding(start = 16.dp, end = 8.dp, top = 6.dp, bottom = 6.dp)
+                        .clickable { navController.navigate("plusOnboarding") }
                 ) {
                     Row {
                         Text(
@@ -250,11 +253,4 @@ private fun sortCloud() {
             contentDescription = null
         )
     }
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun PlusScreenPreview() {
-    PlusScreen()
 }
