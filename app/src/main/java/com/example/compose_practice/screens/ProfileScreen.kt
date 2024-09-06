@@ -50,6 +50,7 @@ fun ProfileScreen() {
                         )
                     }
                 },
+                colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = Color.White)
             )
         }
     ) { innerPadding ->
@@ -66,92 +67,103 @@ fun ProfileScreen() {
                     .fillMaxSize()
                     .verticalScroll(scrollState) // 스크롤 가능하게 만들기
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 19.dp, end = 16.dp, bottom = 12.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                //프로필 정보
+                Box(
+                    modifier = Modifier.background(color = Color.White)
                 ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_profile),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(60.dp)
-                            .padding(end = 14.dp, bottom = 5.dp)
-                    )
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.Top),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.ic_level),
-                            contentDescription = null
-                        )
-                        Text(
-                            text = "김두둑",
-                            style = ComposePracticeTheme.typography.Bn1_b.copy(color = ComposePracticeTheme.colors.black)
-                        )
-                    }
-                    Spacer(modifier = Modifier.weight(1f))
-                    Box(
-                        modifier = Modifier
-                            .border(
-                                width = 1.dp,
-                                color = ComposePracticeTheme.colors.g1,
-                                shape = RoundedCornerShape(size = 32.dp)
-                            )
-                            .background(color = Color.White, RoundedCornerShape(size = 32.dp))
-                            .padding(horizontal = 12.dp, vertical = 8.dp)
-                    ) {
+                    Column {
                         Row(
-                            horizontalArrangement = Arrangement.spacedBy(4.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 19.dp, end = 16.dp, bottom = 12.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Image(
-                                painter = painterResource(id = R.drawable.ic_dotori),
+                                painter = painterResource(id = R.drawable.ic_profile),
                                 contentDescription = null,
-                                modifier = Modifier.size(38.dp)
+                                modifier = Modifier
+                                    .size(60.dp)
+                                    .padding(end = 14.dp, bottom = 5.dp)
                             )
-                            Text(
-                                text = "20",
-                                style = ComposePracticeTheme.typography.Br1_sb.copy(color = ComposePracticeTheme.colors.black),
-                                modifier = Modifier.padding(end = 8.dp)
-                            )
+                            Column(
+                                verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.Top),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.ic_level),
+                                    contentDescription = null
+                                )
+                                Text(
+                                    text = "김두둑",
+                                    style = ComposePracticeTheme.typography.Bn1_b.copy(color = ComposePracticeTheme.colors.black)
+                                )
+                            }
+                            Spacer(modifier = Modifier.weight(1f))
+                            Box(
+                                modifier = Modifier
+                                    .border(
+                                        width = 1.dp,
+                                        color = ComposePracticeTheme.colors.g1,
+                                        shape = RoundedCornerShape(size = 32.dp)
+                                    )
+                                    .background(
+                                        color = Color.White,
+                                        RoundedCornerShape(size = 32.dp)
+                                    )
+                                    .padding(horizontal = 12.dp, vertical = 8.dp)
+                            ) {
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Image(
+                                        painter = painterResource(id = R.drawable.ic_dotori),
+                                        contentDescription = null,
+                                        modifier = Modifier.size(38.dp)
+                                    )
+                                    Text(
+                                        text = "20",
+                                        style = ComposePracticeTheme.typography.Br1_sb.copy(color = ComposePracticeTheme.colors.black),
+                                        modifier = Modifier.padding(end = 8.dp)
+                                    )
+                                }
+                            }
                         }
-                    }
-                }
 
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(2.dp, Alignment.Top),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                        Text(
-                            text = "팔로워",
-                            style = ComposePracticeTheme.typography.Caption1_r.copy(color = ComposePracticeTheme.colors.g4)
-                        )
-                        Text(
-                            text = "0",
-                            style = ComposePracticeTheme.typography.Ln1_m.copy(color = ComposePracticeTheme.colors.g6)
-                        )
-                    }
-                    Column(
-                        verticalArrangement = Arrangement.spacedBy(2.dp, Alignment.Top),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                        Text(
-                            text = "팔로잉",
-                            style = ComposePracticeTheme.typography.Caption1_r.copy(color = ComposePracticeTheme.colors.g4)
-                        )
-                        Text(
-                            text = "0",
-                            style = ComposePracticeTheme.typography.Ln1_m.copy(color = ComposePracticeTheme.colors.g6)
-                        )
+                        //팔로워&팔로잉 정보
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 8.dp),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            Column(
+                                verticalArrangement = Arrangement.spacedBy(2.dp, Alignment.Top),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                            ) {
+                                Text(
+                                    text = "팔로워",
+                                    style = ComposePracticeTheme.typography.Caption1_r.copy(color = ComposePracticeTheme.colors.g4)
+                                )
+                                Text(
+                                    text = "0",
+                                    style = ComposePracticeTheme.typography.Ln1_m.copy(color = ComposePracticeTheme.colors.g6)
+                                )
+                            }
+                            Column(
+                                verticalArrangement = Arrangement.spacedBy(2.dp, Alignment.Top),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                            ) {
+                                Text(
+                                    text = "팔로잉",
+                                    style = ComposePracticeTheme.typography.Caption1_r.copy(color = ComposePracticeTheme.colors.g4)
+                                )
+                                Text(
+                                    text = "0",
+                                    style = ComposePracticeTheme.typography.Ln1_m.copy(color = ComposePracticeTheme.colors.g6)
+                                )
+                            }
+                        }
                     }
                 }
 
