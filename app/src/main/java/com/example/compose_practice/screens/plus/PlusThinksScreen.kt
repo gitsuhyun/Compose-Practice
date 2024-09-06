@@ -31,16 +31,14 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.compose_practice.R
 import com.example.compose_practice.ui.theme.ComposePracticeTheme
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PlusCompleteScreen() {
+fun PlusThinksScreen() {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -57,79 +55,87 @@ fun PlusCompleteScreen() {
                         )
                     }
                 },
-                colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = ComposePracticeTheme.colors.v1)
+                colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = ComposePracticeTheme.colors.white)
             )
         }
     ) { innerPadding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = ComposePracticeTheme.colors.v1)
+                .background(color = ComposePracticeTheme.colors.g1)
                 .padding(innerPadding),
-            contentAlignment = Alignment.Center
         ) {
-
-            Column(
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 22.dp),
-                verticalArrangement = Arrangement.spacedBy(5.4.dp, Alignment.Top),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                Spacer(modifier = Modifier.height(41.dp))
-                //말풍선
+            Column {
+                //상단 타이틀
                 Box(
                     modifier = Modifier
-                        .background(
-                            color = Color.White,
-                            shape = RoundedCornerShape(size = 30.dp)
-                        )
-                        .shadow(
-                            elevation = 17.5.dp,
-                            spotColor = Color(0xE8FFFFFF),
-                            ambientColor = Color(0xE8FFFFFF)
-                        )
-                        .border(width = 1.dp, color = ComposePracticeTheme.colors.v2)
-                        .padding(horizontal = 25.dp, vertical = 27.dp),
-                    contentAlignment = Alignment.Center
+                        .fillMaxWidth()
+                        .padding(bottom = 20.dp)
+                        .background(color = ComposePracticeTheme.colors.white)
+
                 ) {
-                    Column (
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ){
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 31.dp, vertical = 20.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Top),
+                    ) {
                         Row {
                             Text(
-                                text = "생각 구름",
-                                style = ComposePracticeTheme.typography.Heading1_b.copy(
-                                    color = ComposePracticeTheme.colors.v6,
-                                    textAlign = TextAlign.Center
-                                )
+                                text = "나의 생각 ",
+                                style = ComposePracticeTheme.typography.Heading1_b.copy(color = ComposePracticeTheme.colors.v6)
                             )
                             Text(
-                                text = "을 완성했어요!",
-                                style = ComposePracticeTheme.typography.Heading1_b.copy(
-                                    color = ComposePracticeTheme.colors.black,
-                                    textAlign = TextAlign.Center
-                                )
+                                text = "모음",
+                                style = ComposePracticeTheme.typography.Heading1_b.copy(color = Color.Black)
                             )
                         }
-                        Spacer(modifier = Modifier.height(16.dp))
                         Text(
-                            text = "완성된 생각구름을 구경해볼까요?",
-                            style = ComposePracticeTheme.typography.Lr1_m.copy(
-                                color = ComposePracticeTheme.colors.g5,
-                                textAlign = TextAlign.Center
-                            )
+                            text = "이 뉴스레터를 통해 나는 이렇게 생각했어요.",
+                            style = ComposePracticeTheme.typography.Caption1_m.copy(color = ComposePracticeTheme.colors.g4)
                         )
+
+
                     }
                 }
-                Image(
-                    painter = painterResource(id = R.drawable.iv_shadow_cloud),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxWidth()
-                )
-                Spacer(modifier = Modifier.weight(1f))
-                //이동 버튼
-                nextButton()
+                //버튼 레이아웃
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 22.dp)
+                ) {
+                    //생각 카드 레이아웃
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 15.dp)
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .border(
+                                    width = 1.dp,
+                                    color = ComposePracticeTheme.colors.g1,
+                                    shape = RoundedCornerShape(size = 8.dp)
+                                )
+                                .fillMaxWidth()
+                                .background(
+                                    color = ComposePracticeTheme.colors.white,
+                                    shape = RoundedCornerShape(size = 8.dp)
+                                )
+                                .padding(vertical = 15.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = "테슬라의 기술 혁신",
+                                style = ComposePracticeTheme.typography.Lr1_sb.copy(color = ComposePracticeTheme.colors.g6)
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.weight(1f))
+                    //이동 버튼
+                    nextButton()
+                }
             }
         }
     }
@@ -152,7 +158,7 @@ private fun nextButton() {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "구경하기",
+            text = "완료하기",
             style = ComposePracticeTheme.typography.Bn1_b.copy(color = Color.White)
         )
     }
@@ -160,6 +166,6 @@ private fun nextButton() {
 
 @Preview
 @Composable
-fun PlusCompletePreview() {
-    PlusCompleteScreen()
+fun PlusThinksPreview() {
+    PlusThinksScreen()
 }
