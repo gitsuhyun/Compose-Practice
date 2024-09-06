@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -92,7 +93,7 @@ fun ProfileScreen() {
                         )
                     }
                     Spacer(modifier = Modifier.weight(1f))
-                    Box (
+                    Box(
                         modifier = Modifier
                             .border(
                                 width = 1.dp,
@@ -101,11 +102,11 @@ fun ProfileScreen() {
                             )
                             .background(color = Color.White, RoundedCornerShape(size = 32.dp))
                             .padding(horizontal = 12.dp, vertical = 8.dp)
-                    ){
-                        Row (
+                    ) {
+                        Row(
                             horizontalArrangement = Arrangement.spacedBy(4.dp),
                             verticalAlignment = Alignment.CenterVertically
-                        ){
+                        ) {
                             Image(
                                 painter = painterResource(id = R.drawable.ic_dotori),
                                 contentDescription = null,
@@ -155,14 +156,17 @@ fun ProfileScreen() {
                 }
 
                 //프로필 아래
-                Box (
+                Box(
                     modifier = Modifier
                         .background(ComposePracticeTheme.colors.g1)
                         .padding(top = 32.dp)
-                ){
+                ) {
                     Column(modifier = Modifier.padding(start = 20.dp, end = 20.dp)) {
                         //목표 달성률
                         myGoal()
+
+                        Spacer(modifier = Modifier.height(43.6.dp))
+
                         //나의 아카이브
                         Text(
                             text = "나의 아카이브",
@@ -196,14 +200,57 @@ private fun myGoal() {
         style = ComposePracticeTheme.typography.Headline2_b.copy(color = ComposePracticeTheme.colors.g6),
         modifier = Modifier.padding(bottom = 12.dp)
     )
-    Image(
-        painter = painterResource(id = R.drawable.iv_week_news),
-        contentDescription = null,
+    Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 43.6.dp),
-        contentScale = ContentScale.Crop
-    )
+            .background(Color.White, RoundedCornerShape(size = 10.dp))
+            .padding(vertical = 20.dp, horizontal = 15.dp)
+
+    ) {
+        Column {
+            Row {
+                Text(
+                    text = "일주일 중에 ",
+                    style = ComposePracticeTheme.typography.Lr1_sb.copy(color = ComposePracticeTheme.colors.g5)
+                )
+                //읽은 뉴스 세기
+                Text(
+                    text = "1",
+                    style = ComposePracticeTheme.typography.Lr1_sb.copy(color = ComposePracticeTheme.colors.v6)
+                )
+                Text(
+                    text = "일 동안 뉴스를 읽었어요!",
+                    style = ComposePracticeTheme.typography.Lr1_sb.copy(color = ComposePracticeTheme.colors.g5)
+                )
+            }
+            Spacer(modifier = Modifier.height(20.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                val daysOfWeek = listOf("일", "월", "화", "수", "목", "금", "토")
+
+                daysOfWeek.forEach { day ->
+                    Column(
+                        modifier = Modifier.weight(1f),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = day,
+                            style = ComposePracticeTheme.typography.Label2_r.copy(color = ComposePracticeTheme.colors.g4),
+                        )
+                        Spacer(modifier = Modifier.height(13.dp))
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_week_cloud_unfill),
+                            contentDescription = null,
+                        )
+                    }
+                }
+            }
+        }
+
+    }
 }
 
 @Composable
@@ -227,10 +274,16 @@ private fun myArchives() {
                         text = "글로벌",
                         style = ComposePracticeTheme.typography.Bn2_sb.copy(color = ComposePracticeTheme.colors.black)
                     )
-                    Text(
-                        text = "10개",
-                        style = ComposePracticeTheme.typography.Caption2_m.copy(color = ComposePracticeTheme.colors.v6)
-                    )
+                    Row {
+                        Text(
+                            text = "10",
+                            style = ComposePracticeTheme.typography.Caption2_m.copy(color = ComposePracticeTheme.colors.v6)
+                        )
+                        Text(
+                            text = "개",
+                            style = ComposePracticeTheme.typography.Caption2_m.copy(color = ComposePracticeTheme.colors.g5)
+                        )
+                    }
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 Image(
@@ -252,10 +305,16 @@ private fun myArchives() {
                         text = "금융",
                         style = ComposePracticeTheme.typography.Bn2_sb.copy(color = ComposePracticeTheme.colors.black)
                     )
-                    Text(
-                        text = "10개",
-                        style = ComposePracticeTheme.typography.Caption2_m.copy(color = ComposePracticeTheme.colors.v6)
-                    )
+                    Row {
+                        Text(
+                            text = "10",
+                            style = ComposePracticeTheme.typography.Caption2_m.copy(color = ComposePracticeTheme.colors.v6)
+                        )
+                        Text(
+                            text = "개",
+                            style = ComposePracticeTheme.typography.Caption2_m.copy(color = ComposePracticeTheme.colors.g5)
+                        )
+                    }
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 Image(
@@ -285,10 +344,16 @@ private fun myArchives() {
                         text = "증권",
                         style = ComposePracticeTheme.typography.Bn2_sb.copy(color = ComposePracticeTheme.colors.black)
                     )
-                    Text(
-                        text = "10개",
-                        style = ComposePracticeTheme.typography.Caption2_m.copy(color = ComposePracticeTheme.colors.v6)
-                    )
+                    Row {
+                        Text(
+                            text = "10",
+                            style = ComposePracticeTheme.typography.Caption2_m.copy(color = ComposePracticeTheme.colors.v6)
+                        )
+                        Text(
+                            text = "개",
+                            style = ComposePracticeTheme.typography.Caption2_m.copy(color = ComposePracticeTheme.colors.g5)
+                        )
+                    }
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 Image(
@@ -310,10 +375,16 @@ private fun myArchives() {
                         text = "부동산",
                         style = ComposePracticeTheme.typography.Bn2_sb.copy(color = ComposePracticeTheme.colors.black)
                     )
-                    Text(
-                        text = "10개",
-                        style = ComposePracticeTheme.typography.Caption2_m.copy(color = ComposePracticeTheme.colors.v6)
-                    )
+                    Row {
+                        Text(
+                            text = "10",
+                            style = ComposePracticeTheme.typography.Caption2_m.copy(color = ComposePracticeTheme.colors.v6)
+                        )
+                        Text(
+                            text = "개",
+                            style = ComposePracticeTheme.typography.Caption2_m.copy(color = ComposePracticeTheme.colors.g5)
+                        )
+                    }
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 Image(
