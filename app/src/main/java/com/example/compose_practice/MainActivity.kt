@@ -6,8 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -19,14 +17,14 @@ import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -38,12 +36,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.compose_practice.screens.HomeScreen
-import com.example.compose_practice.screens.PlusScreen
+import com.example.compose_practice.screens.plus.PlusScreen
 import com.example.compose_practice.screens.ProfileScreen
 import com.example.compose_practice.screens.Screens
 import com.example.compose_practice.screens.ShareScreen
+import com.example.compose_practice.screens.plus.PlusOnboardingScreen
 import com.example.compose_practice.ui.theme.ComposePracticeTheme
-import com.example.compose_practice.ui.theme.colors
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,79 +63,83 @@ fun MyBottomAppBar() {
     val selected = remember {
         mutableStateOf(Icons.Default.Home)
     }
+    //네비바 visibility
+    var showBottomBar by remember { mutableStateOf(true) }
 
     Scaffold(
         bottomBar = {
-            BottomAppBar(
-                contentColor = Color.White,
-                containerColor = Color.White
-            ) {
-                IconButton(
-                    onClick = {
-                        selected.value = Icons.Default.Home
-                        navigationController.navigate(Screens.Home.screen) {
-                            popUpTo(0)
-                        }
-                    },
-                    modifier = Modifier.weight(1f)
+            if (showBottomBar) {
+                BottomAppBar(
+                    contentColor = Color.White,
+                    containerColor = Color.White
                 ) {
-                    NavItem(
-                        icon = Icons.Default.Home,
-                        selected = selected,
-                        selectedIcon = Icons.Default.Home,
-                        label = "홈"
-                    )
-                }
+                    IconButton(
+                        onClick = {
+                            selected.value = Icons.Default.Home
+                            navigationController.navigate(Screens.Home.screen) {
+                                popUpTo(0)
+                            }
+                        },
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        NavItem(
+                            icon = Icons.Default.Home,
+                            selected = selected,
+                            selectedIcon = Icons.Default.Home,
+                            label = "홈"
+                        )
+                    }
 
-                IconButton(
-                    onClick = {
-                        selected.value = Icons.Default.Add
-                        navigationController.navigate(Screens.Plus.screen) {
-                            popUpTo(0)
-                        }
-                    },
-                    modifier = Modifier.weight(1f)
-                ) {
-                    NavItem(
-                        icon = Icons.Default.Add,
-                        selected = selected,
-                        selectedIcon = Icons.Default.Add,
-                        label = "생각더하기"
-                    )
-                }
+                    IconButton(
+                        onClick = {
+                            selected.value = Icons.Default.Add
+                            navigationController.navigate(Screens.Plus.screen) {
+                                popUpTo(0)
+                            }
+                        },
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        NavItem(
+                            icon = Icons.Default.Add,
+                            selected = selected,
+                            selectedIcon = Icons.Default.Add,
+                            label = "생각더하기"
+                        )
+                    }
 
-                IconButton(
-                    onClick = {
-                        selected.value = Icons.Default.Share
-                        navigationController.navigate(Screens.Share.screen) {
-                            popUpTo(0)
-                        }
-                    },
-                    modifier = Modifier.weight(1f)
-                ) {
-                    NavItem(
-                        icon = Icons.Default.Share,
-                        selected = selected,
-                        selectedIcon = Icons.Default.Share,
-                        label = "생각나누기"
-                    )
-                }
+                    IconButton(
+                        onClick = {
+                            selected.value = Icons.Default.Share
+                            navigationController.navigate(Screens.Share.screen) {
+                                popUpTo(0)
+                            }
+                        },
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        NavItem(
+                            icon = Icons.Default.Share,
+                            selected = selected,
+                            selectedIcon = Icons.Default.Share,
+                            label = "생각나누기"
+                        )
+                    }
 
-                IconButton(
-                    onClick = {
-                        selected.value = Icons.Default.Person
-                        navigationController.navigate(Screens.Profile.screen) {
-                            popUpTo(0)
-                        }
-                    },
-                    modifier = Modifier.weight(1f)
-                ) {
-                    NavItem(
-                        icon = Icons.Default.Person,
-                        selected = selected,
-                        selectedIcon = Icons.Default.Person,
-                        label = "마이페이지"
-                    )
+                    IconButton(
+                        onClick = {
+                            selected.value = Icons.Default.Person
+                            navigationController.navigate(Screens.Profile.screen) {
+                                popUpTo(0)
+                            }
+                        },
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        NavItem(
+                            icon = Icons.Default.Person,
+                            selected = selected,
+                            selectedIcon = Icons.Default.Person,
+                            label = "마이페이지"
+                        )
+                    }
                 }
             }
         }
@@ -148,7 +150,11 @@ fun MyBottomAppBar() {
             modifier = Modifier.padding(paddingValues)
         ) {
             composable(Screens.Home.screen) { HomeScreen() }
-            composable(Screens.Plus.screen) { PlusScreen() }
+            composable(Screens.Plus.screen) { PlusScreen(navigationController) }
+            composable(Screens.Plus.PlusOnboarding.screen) {
+                showBottomBar = false
+                PlusOnboardingScreen()
+            }
             composable(Screens.Share.screen) { ShareScreen() }
             composable(Screens.Profile.screen) { ProfileScreen() }
         }
