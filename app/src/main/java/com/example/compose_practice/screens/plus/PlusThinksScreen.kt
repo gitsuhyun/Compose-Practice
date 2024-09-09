@@ -9,14 +9,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -25,20 +22,25 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.compose_practice.R
 import com.example.compose_practice.ui.theme.ComposePracticeTheme
+import com.example.compose_practice.viewmodel.plus.PlusViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PlusThinksScreen() {
+fun PlusThinksScreen(viewModel: PlusViewModel = viewModel()) {
+    val thinkCards by viewModel.thinkCards.collectAsState()
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -109,8 +111,13 @@ fun PlusThinksScreen() {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 15.dp)
+                            .padding(horizontal = 15.dp),
                     ) {
+                        thinkCards.forEach{
+                            content ->
+                            thinkCard(content = content)
+                        }
+                        //마지막 생각박스
                         Box(
                             modifier = Modifier
                                 .border(
@@ -127,7 +134,7 @@ fun PlusThinksScreen() {
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
-                                text = "테슬라의 기술 혁신",
+                                text = "마지막 생각박스",
                                 style = ComposePracticeTheme.typography.Lr1_sb.copy(color = ComposePracticeTheme.colors.g6)
                             )
                         }
@@ -139,6 +146,38 @@ fun PlusThinksScreen() {
             }
         }
     }
+}
+
+@Composable
+private fun thinkCard(content: String) {
+    Box(
+        modifier = Modifier
+            .border(
+                width = 1.dp,
+                color = ComposePracticeTheme.colors.g1,
+                shape = RoundedCornerShape(size = 8.dp)
+            )
+            .fillMaxWidth()
+            .background(
+                color = ComposePracticeTheme.colors.white,
+                shape = RoundedCornerShape(size = 8.dp)
+            )
+            .padding(vertical = 15.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = content,
+            style = ComposePracticeTheme.typography.Lr1_sb.copy(color = ComposePracticeTheme.colors.g6)
+        )
+    }
+    //간격 사이 역삼각형 이미지
+    Image(
+        painter = painterResource(id = R.drawable.ic_thinks_triangle),
+        contentDescription = null,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 12.dp)
+    )
 }
 
 @Composable
