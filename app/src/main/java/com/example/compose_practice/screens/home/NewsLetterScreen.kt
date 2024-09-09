@@ -1,4 +1,4 @@
-package com.example.compose_practice.screens
+package com.example.compose_practice.screens.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -8,17 +8,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 
+@Preview
 @Composable
-fun HomeScreen() {
+fun NewsLetterScreen() {
     Box(modifier = Modifier.fillMaxSize()){
         Column (modifier = Modifier
             .fillMaxSize()
             .align(Alignment.Center),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "home", fontSize = 30.sp,)
+            Text(text = "newsletter", fontSize = 30.sp,)
         }
     }
 }
