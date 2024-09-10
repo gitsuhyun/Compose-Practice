@@ -15,7 +15,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -67,104 +69,135 @@ fun LiveNewsScreen() {
                 .background(color = ComposePracticeTheme.colors.g1)
                 .padding(innerPadding),
         ) {
-            Box(
-                modifier = Modifier
-                    .background(color = ComposePracticeTheme.colors.white)
-                    .padding(horizontal = 16.dp, vertical = 5.dp)
+            // 스크롤 상태를 기억
+            val scrollState = rememberScrollState()
 
-            ) {
-                Column {
-                    //인기 순위 칩
-                    rankingChip()
-                    Spacer(modifier = Modifier.height(12.dp))
-                    newsTitle()
-                    Spacer(modifier = Modifier.height(16.dp))
-                    newsInfo()
-                    //구분선
-                    Divider(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 16.dp, bottom = 20.dp),
-                        color = ComposePracticeTheme.colors.g1, // 원하는 회색으로 설정
-                        thickness = 1.dp // 선의 두께
-                    )
-                    //3줄 요약
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(
-                                color = ComposePracticeTheme.colors.g1,
-                                shape = RoundedCornerShape(size = 10.dp)
-                            )
-                            .padding(horizontal = 24.dp, vertical = 20.dp),
-                    ) {
-                        Column (
-                            verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.Top),
-                            horizontalAlignment = Alignment.Start,
-                            ){
-                            Text(
-                                text = "3줄 요약",
-                                style = ComposePracticeTheme.typography.Headline1_b.copy(
-                                    color = ComposePracticeTheme.colors.v6,
-                                )
-                            )
-                            //요약
-                            repeat(3) {
-                                summary()
-                            }
-                        }
-
-                    }
-                    //뉴스 전문 보기
-                    moveToNewsSource()
-                    Spacer(modifier = Modifier.height(45.dp))
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Top),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                        //코멘트 타이틀
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Text(
-                                text = "이 ",
-                                style = ComposePracticeTheme.typography.Br2_sb.copy(
-                                    color = ComposePracticeTheme.colors.black,
-                                ),
-                                textAlign = TextAlign.Center
-                            )
-                            Image(
-                                painter = painterResource(id = R.drawable.tv_live),
-                                contentDescription = null,
-                            )
-                            Text(text = " ")
-                            Image(
-                                painter = painterResource(id = R.drawable.tv_newthink),
-                                contentDescription = null,
-                            )
-                            Text(
-                                text = "에 대한 생각 듣고싶어요!",
-                                style = ComposePracticeTheme.typography.Br2_sb.copy(
-                                    color = ComposePracticeTheme.colors.black,
-                                ),
-                                textAlign = TextAlign.Center
-                            )
-                        }
-                        //코멘트 구름 이미지
-                        Image(
-                            painter = painterResource(id = R.drawable.iv_excited_cloud),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop
+            Column (
+                modifier = Modifier.verticalScroll(scrollState)
+            ){
+                Box(
+                    modifier = Modifier
+                        .background(color = ComposePracticeTheme.colors.white)
+                        .padding(horizontal = 16.dp, vertical = 5.dp)
+                ) {
+                    Column {
+                        //인기 순위 칩
+                        rankingChip()
+                        Spacer(modifier = Modifier.height(12.dp))
+                        newsTitle()
+                        Spacer(modifier = Modifier.height(16.dp))
+                        newsInfo()
+                        //구분선
+                        Divider(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 16.dp, bottom = 20.dp),
+                            color = ComposePracticeTheme.colors.g1, // 원하는 회색으로 설정
+                            thickness = 1.dp // 선의 두께
                         )
-                    }
-                    Spacer(modifier = Modifier.height(24.dp))
-                    //내 생각 작성 버튼
-                    commentButton()
-                    Spacer(modifier = Modifier.height(23.dp))
-                }
+                        //3줄 요약
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(
+                                    color = ComposePracticeTheme.colors.g1,
+                                    shape = RoundedCornerShape(size = 10.dp)
+                                )
+                                .padding(horizontal = 24.dp, vertical = 20.dp),
+                        ) {
+                            Column(
+                                verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.Top),
+                                horizontalAlignment = Alignment.Start,
+                            ) {
+                                Text(
+                                    text = "3줄 요약",
+                                    style = ComposePracticeTheme.typography.Headline1_b.copy(
+                                        color = ComposePracticeTheme.colors.v6,
+                                    )
+                                )
+                                //요약
+                                repeat(3) {
+                                    summary()
+                                }
+                            }
 
+                        }
+                        //뉴스 전문 보기
+                        moveToNewsSource()
+                        Spacer(modifier = Modifier.height(45.dp))
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Top),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                        ) {
+                            //코멘트 타이틀
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = "이 ",
+                                    style = ComposePracticeTheme.typography.Br2_sb.copy(
+                                        color = ComposePracticeTheme.colors.black,
+                                    ),
+                                    textAlign = TextAlign.Center
+                                )
+                                Image(
+                                    painter = painterResource(id = R.drawable.tv_live),
+                                    contentDescription = null,
+                                )
+                                Text(text = " ")
+                                Image(
+                                    painter = painterResource(id = R.drawable.tv_newthink),
+                                    contentDescription = null,
+                                )
+                                Text(
+                                    text = "에 대한 생각 듣고싶어요!",
+                                    style = ComposePracticeTheme.typography.Br2_sb.copy(
+                                        color = ComposePracticeTheme.colors.black,
+                                    ),
+                                    textAlign = TextAlign.Center
+                                )
+                            }
+                            //코멘트 구름 이미지
+                            Image(
+                                painter = painterResource(id = R.drawable.iv_excited_cloud),
+                                contentDescription = null,
+                                contentScale = ContentScale.Crop
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(24.dp))
+                        //내 생각 작성 버튼
+                        commentButton()
+                        Spacer(modifier = Modifier.height(23.dp))
+                    }
+
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(color = ComposePracticeTheme.colors.white)
+                        .padding(top = 36.dp)
+                ) {
+                    Column {
+                        Text(
+                            text = "다른 사람들의 생각은?",
+                            style = ComposePracticeTheme.typography.Headline2_b.copy(
+                                color = ComposePracticeTheme.colors.black,
+                            ),
+                            modifier = Modifier.padding(start = 16.dp, bottom = 17.dp)
+                        )
+                        Image(
+                            painter = painterResource(id = R.drawable.iv_comment_blind),
+                            contentDescription = null,
+                            modifier = Modifier.fillMaxWidth(),
+                            contentScale = ContentScale.FillWidth
+                            )
+                    }
+
+                }
             }
+
         }
     }
 }
