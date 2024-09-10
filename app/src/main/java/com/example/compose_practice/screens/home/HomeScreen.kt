@@ -1,4 +1,4 @@
-package com.example.compose_practice.screens
+package com.example.compose_practice.screens.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
