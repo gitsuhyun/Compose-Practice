@@ -35,6 +35,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.compose_practice.screens.home.HomeScreen
 import com.example.compose_practice.screens.plus.PlusScreen
 import com.example.compose_practice.screens.ProfileScreen
@@ -63,6 +67,8 @@ fun MyBottomAppBar() {
     val selected = remember {
         mutableStateOf(Icons.Default.Home)
     }
+    val plusComposition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.plus))
+
     //네비바 visibility
     var showBottomBar by remember { mutableStateOf(true) }
 
