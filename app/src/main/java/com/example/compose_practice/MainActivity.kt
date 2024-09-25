@@ -15,7 +15,6 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -28,16 +27,17 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.airbnb.lottie.LottieComposition
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.compose_practice.screens.home.HomeScreen
 import com.example.compose_practice.screens.plus.PlusScreen
@@ -67,7 +67,10 @@ fun MyBottomAppBar() {
     val selected = remember {
         mutableStateOf(Icons.Default.Home)
     }
+    val mainComposition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.main))
     val plusComposition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.plus))
+    val divideComposition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.divide))
+    val myComposition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.my))
 
     //네비바 visibility
     var showBottomBar by remember { mutableStateOf(true) }
@@ -88,12 +91,13 @@ fun MyBottomAppBar() {
                         },
                         modifier = Modifier.weight(1f)
                     ) {
-                        NavItem(
-                            icon = Icons.Default.Home,
-                            selected = selected,
-                            selectedIcon = Icons.Default.Home,
-                            label = "홈"
-                        )
+                        mainComposition?.let {
+                            NavItem(
+                                composition = it,
+                                isSelected = false,
+                                label = "홈"
+                            )
+                        }
                     }
 
                     IconButton(
@@ -105,12 +109,13 @@ fun MyBottomAppBar() {
                         },
                         modifier = Modifier.weight(1f)
                     ) {
-                        NavItem(
-                            icon = Icons.Default.Add,
-                            selected = selected,
-                            selectedIcon = Icons.Default.Add,
-                            label = "생각더하기"
-                        )
+                        plusComposition?.let {
+                            NavItem(
+                                composition = it,
+                                isSelected = false,
+                                label = "생각더하기"
+                            )
+                        }
                     }
 
                     IconButton(
@@ -122,12 +127,13 @@ fun MyBottomAppBar() {
                         },
                         modifier = Modifier.weight(1f)
                     ) {
-                        NavItem(
-                            icon = Icons.Default.Share,
-                            selected = selected,
-                            selectedIcon = Icons.Default.Share,
-                            label = "생각나누기"
-                        )
+                        divideComposition?.let {
+                            NavItem(
+                                composition = it,
+                                isSelected = false,
+                                label = "생각나누기"
+                            )
+                        }
                     }
 
                     IconButton(
@@ -139,12 +145,13 @@ fun MyBottomAppBar() {
                         },
                         modifier = Modifier.weight(1f)
                     ) {
-                        NavItem(
-                            icon = Icons.Default.Person,
-                            selected = selected,
-                            selectedIcon = Icons.Default.Person,
-                            label = "마이페이지"
-                        )
+                        myComposition?.let {
+                            NavItem(
+                                composition = it,
+                                isSelected = false,
+                                label = "마이페이지"
+                            )
+                        }
                     }
                 }
             }
@@ -169,20 +176,20 @@ fun MyBottomAppBar() {
 
 @Composable
 fun RowScope.NavItem(
-    icon: ImageVector,
-    selected: MutableState<ImageVector>,
-    selectedIcon: ImageVector,
+    composition: LottieComposition,
+    isSelected: Boolean,
     label: String,
 ) {
+    val navItemProgress by animateLottieCompositionAsState(composition = composition, iterations = LottieConstants.IterateForever, isPlaying = isSelected)
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = label,
+        LottieAnimation(
+            composition = composition,
+            progress = navItemProgress,
             modifier = Modifier.size(26.dp),
-            tint = if (selected.value == selectedIcon) Color.Blue else Color.DarkGray
         )
         Text(
             text = label,
