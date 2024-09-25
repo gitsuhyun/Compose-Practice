@@ -135,9 +135,9 @@ fun ProfileScreen() {
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(bottom = 8.dp),
-                            horizontalArrangement = Arrangement.SpaceEvenly
                         ) {
                             Column(
+                                modifier = Modifier.weight(1f),
                                 verticalArrangement = Arrangement.spacedBy(2.dp, Alignment.Top),
                                 horizontalAlignment = Alignment.CenterHorizontally,
                             ) {
@@ -151,6 +151,7 @@ fun ProfileScreen() {
                                 )
                             }
                             Column(
+                                modifier = Modifier.weight(1f),
                                 verticalArrangement = Arrangement.spacedBy(2.dp, Alignment.Top),
                                 horizontalAlignment = Alignment.CenterHorizontally,
                             ) {
@@ -281,7 +282,9 @@ private fun myArchives() {
                 .padding(vertical = 16.dp, horizontal = 16.dp)
         ) {
             Row {
-                Column {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.Top),
+                ) {
                     Text(
                         text = "글로벌",
                         style = ComposePracticeTheme.typography.Bn2_sb.copy(color = ComposePracticeTheme.colors.black)
@@ -312,7 +315,9 @@ private fun myArchives() {
                 .padding(vertical = 16.dp, horizontal = 16.dp)
         ) {
             Row {
-                Column {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.Top),
+                ) {
                     Text(
                         text = "금융",
                         style = ComposePracticeTheme.typography.Bn2_sb.copy(color = ComposePracticeTheme.colors.black)
@@ -351,7 +356,9 @@ private fun myArchives() {
                 .padding(vertical = 16.dp, horizontal = 16.dp)
         ) {
             Row {
-                Column {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.Top),
+                ) {
                     Text(
                         text = "증권",
                         style = ComposePracticeTheme.typography.Bn2_sb.copy(color = ComposePracticeTheme.colors.black)
@@ -382,7 +389,9 @@ private fun myArchives() {
                 .padding(vertical = 16.dp, horizontal = 16.dp)
         ) {
             Row {
-                Column {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.Top),
+                ) {
                     Text(
                         text = "부동산",
                         style = ComposePracticeTheme.typography.Bn2_sb.copy(color = ComposePracticeTheme.colors.black)
