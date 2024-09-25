@@ -232,7 +232,8 @@ private fun summary() {
             text = "물가상승률이 예상보다 높아 불과 몇 주 만에 전문가들의 미국 기준금리 인하 예상 시점이 한참 미뤄졌음.",
             style = ComposePracticeTheme.typography.Ln1_r.copy(
                 color = ComposePracticeTheme.colors.g6,
-            )
+            ),
+            modifier = Modifier.padding(top = 5.dp)
         )
     }
 }
