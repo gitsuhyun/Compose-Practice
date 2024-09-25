@@ -122,6 +122,7 @@ fun LiveNewsScreen() {
                             }
 
                         }
+                        Spacer(modifier = Modifier.height(3.dp))
                         //뉴스 전문 보기
                         moveToNewsSource()
                         Spacer(modifier = Modifier.height(45.dp))
@@ -238,7 +239,8 @@ private fun summary() {
             text = "3줄 요약 내용",
             style = ComposePracticeTheme.typography.Ln1_r.copy(
                 color = ComposePracticeTheme.colors.g6,
-            )
+            ),
+            modifier = Modifier.padding(top = 5.dp)
         )
     }
 }
